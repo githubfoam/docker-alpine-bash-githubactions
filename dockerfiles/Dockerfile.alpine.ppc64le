@@ -1,0 +1,14 @@
+FROM ppc64le/alpine
+LABEL org.opencontainers.image.authors="githubfoam"
+
+
+RUN apk --update add git less openssh && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm /var/cache/apk/*
+
+# Create user and set ownership and permissions as required
+RUN adduser -D myuser && chown -R myuser /myapp-data
+
+USER myuser
+
+WORKDIR /tmp
