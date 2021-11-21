@@ -1,0 +1,41 @@
+name: "nginx alpine bash local CI workflow"
+
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+      - cron:  '0 0 1 * *' ##execution of a task in the first minute of the month 
+
+
+jobs:
+
+  mysql-alpine-latest-job:
+    name: "nginx alpine docker ubuntu latest"
+    runs-on: ubuntu-latest
+    env:
+      distribution: "alpine" 
+      version: "latest"
+      name: "alpine/nginx"
+      dockerfiledir: "dockerfiles"
+      dockerfilename: "Dockerfile.alpine.nginx"
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: |
+        hostnamectl status
+        lsb_release -a
+        lsb_release -d
+        cat /etc/lsb-release
+        cat /etc/issue
+        cat /etc/os-release
+        sudo apt-get install -y neofetch && neofetch   
+    - name: "docker build alpine"
+      run: |
+        # destroyed afterwards (use --rm )
+        # all subsequent Dockerfile commands generate new images and the cache is not used
+        sudo docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
+        docker image ls
+        docker image history ${name}:${version}
+        docker system df -v               
+        docker image inspect ${name}:${version}     
