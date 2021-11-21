@@ -8,10 +8,9 @@ RUN apk --update add git less openssh && \
     rm /var/cache/apk/*
 
 # Create user and set ownership and permissions as required
-RUN adduser -D myuser && chown -R myuser /myapp-data
+RUN mkdir myapp-data && adduser -D myuser && chown -R myuser /myapp-data
 
 WORKDIR /tmp
-
 
 RUN apk add --no-cache mysql-client
 
