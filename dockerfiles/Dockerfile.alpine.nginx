@@ -1,0 +1,26 @@
+# https://hub.docker.com/_/alpine
+FROM alpine:latest
+LABEL org.opencontainers.image.authors="githubfoam"
+
+WORKDIR /tmp
+
+RUN apk --update add nginx && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm /var/cache/apk/* && \
+    mkdir -p /run/nginx && \
+    touch /run/nginx/nginx.pid && \
+    adduser -D -g 'www' www && \
+    mkdir /www  && \
+    chown -R www:www /var/lib/nginx && \
+    chown -R www:www /www
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY index.html /www
+
+# Create user and set ownership and permissions as required
+RUN mkdir myapp-data && adduser -D myuser && chown -R myuser /myapp-data
+
+USER myuser
+
+
+RUN ["./usr/sbin/nginx"]
