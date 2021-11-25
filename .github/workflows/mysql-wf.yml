@@ -1,4 +1,4 @@
-name: "mysql alpine bash local CI workflow"
+name: "mysql  CI workflow"
 
 
 on:

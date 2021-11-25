@@ -1,4 +1,4 @@
-name: "alpine bash local CI workflow"
+name: "alpine CI workflow"
 
 
 on:
