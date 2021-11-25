@@ -3,7 +3,10 @@ name: "arm64v8 ppc64le s390x riscv64 CI workflow"
 
 on:
   push:
-    branches: [ test ]
+    branches: [ main ]
+  schedule:
+      - cron:  '0 0 1 * *' ##execution of a task in the first minute of the month     
+
 
 
 jobs:   

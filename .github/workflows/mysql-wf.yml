@@ -3,7 +3,10 @@ name: "mysql alpine bash local CI workflow"
 
 on:
   push:
-    branches: [ test ]
+    branches: [ main ]
+  schedule:
+      - cron:  '0 0 1 * *' ##execution of a task in the first minute of the month     
+
 
 
 jobs:
