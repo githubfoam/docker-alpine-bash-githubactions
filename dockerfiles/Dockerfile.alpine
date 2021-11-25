@@ -3,7 +3,11 @@ FROM alpine:latest
 LABEL org.opencontainers.image.authors="githubfoam"
 
 
-RUN apk --update add git less openssh && \
+RUN apk --update add \
+    git \
+    strace \
+    less \
+    openssh && \
     rm -rf /var/lib/apt/lists/* && \
     rm /var/cache/apk/*
 
