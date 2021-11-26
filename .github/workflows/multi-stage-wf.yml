@@ -9,7 +9,7 @@ on:
 jobs:
 
   ubuntu-alpine-latest-job:
-    name: "alpine docker ubuntu latest"
+    name: "multi stage ubuntu latest"
     runs-on: ubuntu-latest
     env:
       distribution: "alpine" 
