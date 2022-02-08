@@ -12,5 +12,5 @@ RUN apk --update add \
     rm /var/cache/apk/*
 
 #docker run --privileged=true -it --rm --name alpine-sshfs sshfs-image
-RUN apk update && apk add sshfs
+RUN apk update && apk add sshfs && sshfs -V
 
