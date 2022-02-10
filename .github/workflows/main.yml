@@ -8,20 +8,37 @@ on:
 jobs:
 
 # https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action
-  hello_world_job:
+  # hello_world_job:
+  #   runs-on: ubuntu-latest
+  #   name: "A job to say hello"
+  #   steps:
+  #     - name: "Make  entrypoint.sh file executable"
+  #       run: |
+  #         cd hello-world-docker-action*
+  #         chmod +x entrypoint.sh
+  #         cd ..  
+  #     - name: "Hello world action step"
+  #       id: hello
+  #       uses: actions/docker-alpine-bash-githubactions@v1
+  #       with:
+  #         who-to-greet: 'Mona the Octocat'
+  #     # Use the output from the `hello` step
+  #     - name: "Get the output time"
+  #       run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+  hello_world_1_job:
     runs-on: ubuntu-latest
-    name: "A job to say hello"
+    name: A job to say hello
     steps:
-      - name: "Make  entrypoint.sh file executable"
-        run: |
-          cd hello-world-docker-action*
-          chmod +x entrypoint.sh
-          cd ..  
-      - name: "Hello world action step"
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Hello world action step
+        uses: ./ # Uses an action in the root directory
         id: hello
-        uses: actions/docker-alpine-bash-githubactions@v1
         with:
           who-to-greet: 'Mona the Octocat'
       # Use the output from the `hello` step
-      - name: "Get the output time"
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"        
