@@ -14,12 +14,12 @@ jobs:
     steps:
       - name: "Make  entrypoint.sh file executable"
         run: |
-          cd hello-world*
+          cd hello-world-docker-action*
           chmod +x entrypoint.sh
           cd ..  
       - name: "Hello world action step"
         id: hello
-        uses: actions/hello-world-docker-action@v1
+        uses: actions/ docker-alpine-bash-githubactions@v1
         with:
           who-to-greet: 'Mona the Octocat'
       # Use the output from the `hello` step
