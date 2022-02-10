@@ -36,9 +36,7 @@ jobs:
         uses: actions/checkout@v2
       - name: "Make  entrypoint.sh file executable"
         run: |
-          cd hello-world-docker-action*
-          chmod +x entrypoint.sh
-          cd ..          
+          chmod +x entrypoint.sh          
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory
         id: hello
