@@ -11,11 +11,19 @@ RUN apk --update add \
     rm -rf /var/lib/apt/lists/* && \
     rm /var/cache/apk/*
 
+# https://github.com/katacoda/golang-http-server
+RUN mkdir /app 
+ADD . /app/ 
+WORKDIR /app
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+
+EXPOSE 80
+
     # create a user ‘builder‘ with home directory ‘/home/vagrant‘, 
     # default shell /bin/bash and adds extra information about user
-#  /bin/sh: useradd: not found
-# RUN useradd -m -d /home/vagrant -s /bin/bash -c "builder" -U vagrant  && \
-#     chown -R vagrant /home/vagrant
-# USER vagrant
+RUN useradd -m -d /home/vagrant -s /bin/bash -c "builder" -U vagrant  && \
+    chown -R vagrant /home/vagrant
 
-WORKDIR /tmp
+USER vagrant
+
+CMD ["/app/main"]

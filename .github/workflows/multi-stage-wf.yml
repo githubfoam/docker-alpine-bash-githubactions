@@ -11,12 +11,11 @@ jobs:
   ubuntu-alpine-latest-job:
     name: "multi stage ubuntu latest"
     runs-on: ubuntu-latest
-    env:
-      distribution: "alpine" 
+    env: 
       version: "latest"
       name: "alpine/multistage "
-      dockerfiledir: "dockerfiles"
-      dockerfilename: "Dockerfile.alpine.ubuntu"
+      dockerdir: "dockerfiles"
+      dockerfile: "Dockerfile.alpine.ubuntu"
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
@@ -32,7 +31,7 @@ jobs:
       run: |
         # destroyed afterwards (use --rm )
         # all subsequent Dockerfile commands generate new images and the cache is not used
-        sudo docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
+        docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerdir}/${dockerfile} 
         docker image ls
         docker image history ${name}:${version}
         docker system df -v               
