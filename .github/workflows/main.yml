@@ -76,14 +76,14 @@ jobs:
     name: A job to say hello
     steps:
       - uses: actions/checkout@v2
-      - id: foo
-      - name: "Make  entrypoint.sh file executable"
-        run: |
-          cd custom-composite-action*
-          chmod +x goodbye.sh       
+      - id: foo  
         # uses: actions/hello-world-composite-action@v1
         uses: ./custom-composite-action # Uses an action in the root directory
         with:
-          who-to-greet: 'Mona the Octocat'         
+          who-to-greet: 'Mona the Octocat'  
+      - name: "Make  entrypoint.sh file executable"
+        run: |
+          cd custom-composite-action*
+          chmod +x goodbye.sh                      
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
         shell: bash        
