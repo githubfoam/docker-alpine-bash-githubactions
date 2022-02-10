@@ -26,26 +26,28 @@ jobs:
   #     - name: "Get the output time"
   #       run: echo "The time was ${{ steps.hello.outputs.time }}"
 
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: A job to say hello
-    steps:
-      # To use this repository's private action,
-      # you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: "Make  entrypoint.sh file executable"
-        run: |
-          chmod +x entrypoint.sh          
-      - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
-        id: hello
-        with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"   
+  #OK
+  # hello_world_job:
+  #   runs-on: ubuntu-latest
+  #   name: A job to say hello
+  #   steps:
+  #     # To use this repository's private action,
+  #     # you must check out the repository
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: "Make  entrypoint.sh file executable"
+  #       run: |
+  #         chmod +x entrypoint.sh          
+  #     - name: Hello world action step
+  #       uses: ./ # Uses an action in the root directory
+  #       id: hello
+  #       with:
+  #         who-to-greet: 'Mona the Octocat'
+  #     # Use the output from the `hello` step
+  #     - name: Get the output time
+  #       run: echo "The time was ${{ steps.hello.outputs.time }}"   
 
+  #OK
   hello_world_1_job:
     runs-on: ubuntu-latest
     name: A job to say hello
@@ -54,9 +56,6 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
-      # - name: "Make  entrypoint.sh file executable"
-      #   run: |
-      #     chmod +x entrypoint.sh       
       - name: "Make  entrypoint.sh file executable"
         run: |
           cd hello-world-docker-action*
@@ -70,3 +69,20 @@ jobs:
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}" 
+
+# https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
+  composite_hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - uses: actions/checkout@v2
+      - id: foo
+        uses: actions/hello-world-composite-action@v1
+        with:
+          who-to-greet: 'Mona the Octocat'
+      - name: "Make  entrypoint.sh file executable"
+        run: |
+          cd custom-composite-action*
+          chmod +x goodbye.sh          
+      - run: echo random-number ${{ steps.foo.outputs.random-number }}
+        shell: bash        
