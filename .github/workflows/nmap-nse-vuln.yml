@@ -42,13 +42,13 @@ jobs:
         # https://github.com/blackducksoftware/blackduck-docker-inspector
         curl -O  https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh
         chmod +x blackduck-docker-inspector.sh 
-        bash blackduck-docker-inspector.sh  --upload.bdio=false --docker.image=alpine/nmap-nse-vuln:latest nmap
+        bash blackduck-docker-inspector.sh  --upload.bdio=false --docker.image=alpine/nmap-nse-vuln:latest 
         #  run Black Duck Docker Inspector without connecting to Black Duck 
-        bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --upload.bdio=false --docker.image=ubuntu
+        # bash <(curl -s https://blackducksoftware.github.io/blackduck-docker-inspector/blackduck-docker-inspector.sh) --upload.bdio=false --docker.image=alpine/nmap-nse-vuln:latest
         # docker run -i alpine/nmap-nse-vuln:latest nmap -h #OK
         # docker run alpine/nmap-nse-vuln:latest nmap -h #OK
         # docker run alpine/nmap-nse-vuln:latest nmap -v -A scanme.nmap.org #OK
-        # nmap -sV --script=vulscan/vulscan.nse scanme.nmap.org
+        nmap -sV --script=vulscan/vulscan.nse scanme.nmap.org #not OK
         
 
     
