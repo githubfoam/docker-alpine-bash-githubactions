@@ -8,6 +8,7 @@ RUN apk --update add nmap \
                      git \
                      bash & \ 
         rm -rf /var/lib/apt/lists/* && \
+        git --version  && \
         git clone https://github.com/scipag/vulscan.git /usr/share/nmap/scripts/vulscan
 
 WORKDIR /usr/share/nmap/scripts/vulscan
