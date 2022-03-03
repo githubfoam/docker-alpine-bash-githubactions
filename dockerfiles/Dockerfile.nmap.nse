@@ -18,8 +18,12 @@ RUN git clone https://github.com/scipag/vulscan.git \
         /usr/share/nmap/scripts/vulscan && \
         ln -s `pwd`/scipag_vulscan /usr/share/nmap/scripts/vulscan
 
+#update Vuln DBs        
+RUN set -xe && chmod +x utilities/updater/updateFiles.sh && \
+    ./utilities/updater//updateFiles.sh
+
 #Update CVE databases
-CMD ["/bin/bash","updateFiles.sh"]
+# CMD ["/bin/bash","updateFiles.sh"]
 
 ENTRYPOINT ["nmap"]
 CMD ["-h"]
