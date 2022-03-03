@@ -3,7 +3,7 @@ FROM alpine:latest
 LABEL org.opencontainers.image.authors="githubfoam"
 
 
-RUN apk --update add nmap \
+RUN set -xe && apk --update add nmap \
                      nmap-scripts \
                      git \
                      bash && \ 
@@ -14,13 +14,18 @@ RUN apk --update add nmap \
 
 WORKDIR /usr/share/nmap/scripts/vulscan
 
-RUN git clone https://github.com/scipag/vulscan.git \
+RUN set -xe && git clone https://github.com/scipag/vulscan.git \
         /usr/share/nmap/scripts/vulscan && \
         ln -s `pwd`/scipag_vulscan /usr/share/nmap/scripts/vulscan
 
 #update Vuln DBs        
-RUN set -xe && chmod +x utilities/updater/updateFiles.sh && \
-    ./utilities/updater//updateFiles.sh
+# RUN set -xe && chmod +x utilities/updater/updateFiles.sh && \
+#     ./utilities/updater/updateFiles.sh
+
+COPY updatecvs.sh utilities/updater
+
+RUN set -xe && chmod +x utilities/updater/updatecvs.sh && \
+    ./utilities/updater/updatecvs.sh
 
 #Update CVE databases
 # CMD ["/bin/bash","updateFiles.sh"]
