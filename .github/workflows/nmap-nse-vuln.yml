@@ -14,7 +14,7 @@ jobs:
     env:
       distribution: "alpine" 
       version: "latest"
-      name: "alpine/nginx"
+      name: "alpine/nmap-nse-vuln"
       dockerfiledir: "dockerfiles"
       dockerfilename: "Dockerfile.nmap.nse"    
     steps:
@@ -37,5 +37,6 @@ jobs:
         docker image history ${name}:${version}
         docker system df -v               
         docker image inspect ${name}:${version} 
+        
 
     
