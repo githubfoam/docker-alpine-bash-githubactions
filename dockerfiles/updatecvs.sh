@@ -59,7 +59,8 @@ do
     logIfDebug "Downloading ${file}..."
     wget --quiet --no-check-certificate ${file}
     filename=$(echo ${file} | awk -F/ '{print $NF}')
-    result=$(diff --suppress-common-lines --speed-large-files -y S ${filename} ../../../${filename} | wc -l)
+    # result=$(diff --suppress-common-lines --speed-large-files -y ${filename} ../../../${filename} | wc -l)
+    result=$(diff --speed-large-files -y ${filename} ../../../${filename} | wc -l)
     if [ ${result} -ne 0 ]; then
 	logIfDebug "Updating ${filename} as it differs"
 	mv ${filename} ../../../
