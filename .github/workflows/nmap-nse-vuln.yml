@@ -40,7 +40,8 @@ jobs:
         # find ENTRYPOINT & CMD on an image
         docker inspect -f '{{.Config.Entrypoint}}' alpine/nmap-nse-vuln:latest
         # docker run -i alpine/nmap-nse-vuln:latest nmap -h
-        docker run alpine/nmap-nse-vuln:latest nmap -h
+        # docker run alpine/nmap-nse-vuln:latest nmap -h
+        docker run alpine/nmap-nse-vuln:latest nmap -v -A scanme.nmap.org
         
 
     
