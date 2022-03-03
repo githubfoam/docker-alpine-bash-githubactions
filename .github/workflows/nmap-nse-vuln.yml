@@ -49,7 +49,10 @@ jobs:
         # docker run alpine/nmap-nse-vuln:latest nmap -h #OK
         # docker run alpine/nmap-nse-vuln:latest nmap -v -A scanme.nmap.org #OK
         docker run alpine/nmap-nse-vuln:latest \
-          nmap -sV --script=vulscan/vulscan.nse scanme.nmap.org #not OK
-        
+          nmap -sV --script=vulscan/vulscan.nse scanme.nmap.org #OK
+        # use a single database
+        docker run alpine/nmap-nse-vuln:latest \
+          nmap -sV --script=vulscan/vulscan.nse \
+          --script-args vulscandb=openvas scanme.nmap.org #OK
 
     
