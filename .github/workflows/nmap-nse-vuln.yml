@@ -37,7 +37,7 @@ jobs:
         docker image history ${name}:${version}
         docker system df -v               
         docker image inspect ${name}:${version} 
-        docker run lpine/nmap-nse-vul:latest nmap
+        docker run alpine/nmap-nse-vul:latest nmap
         
 
     
