@@ -22,7 +22,7 @@ RUN set -xe && git clone https://github.com/scipag/vulscan.git \
 # RUN set -xe && chmod +x utilities/updater/updateFiles.sh && \
 #     ./utilities/updater/updateFiles.sh
 
-COPY updatecvs.sh utilities/updater
+COPY dockerfiles/updatecvs.sh utilities/updater
 
 RUN set -xe && chmod +x utilities/updater/updatecvs.sh && \
     ./utilities/updater/updatecvs.sh
