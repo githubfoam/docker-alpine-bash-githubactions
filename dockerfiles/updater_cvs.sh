@@ -41,12 +41,7 @@ function logIfDebug(){
 ##
 ## Create teporary download directory
 ##
-mkdir -p downloading
-
-##
-## Work from the temp directory
-##
-cd downloading
+mkdir -p downloading && cd downloading
 
 ##
 ## For each file, we want to download it, and see if it differs from old one.
@@ -60,11 +55,14 @@ do
     wget --quiet --no-check-certificate ${file}
     filename=$(echo ${file} | awk -F/ '{print $NF}')
     # result=$(diff --suppress-common-lines --speed-large-files -y ${filename} ../../../${filename} | wc -l)
-    result=$(diff --suppress-common-lines --speed-large-files -y ${filename} ../${filename} | wc -l)    if [ ${result} -ne 0 ]; then
+    result=$(diff --suppress-common-lines --speed-large-files -y ${filename} ../${filename} | wc -l)    
+    
+    if [ ${result} -ne 0 ]; then
 	logIfDebug "Updating ${filename} as it differs"
 	mv ${filename} ../../../
 	UPDATED=true
     fi
+
 done
 
 ##
