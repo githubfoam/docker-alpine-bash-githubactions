@@ -49,7 +49,7 @@ jobs:
         # use a single database
         docker run alpine/nmap-nse-vuln:latest \
           --script-args vulscandb=openvas scanme.nmap.org #OK
-      - name: "blackduck docker inspector"
+    - name: "blackduck docker inspector"
       run: |
         set -xe
         # destroyed afterwards (use --rm )
