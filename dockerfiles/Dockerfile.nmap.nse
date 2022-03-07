@@ -22,11 +22,15 @@ RUN set -xe && git clone https://github.com/scipag/vulscan.git \
 # RUN set -xe && chmod +x utilities/updater/updateFiles.sh && \
 #     ./utilities/updater/updateFiles.sh
 
-RUN rm utilities/updater/updateFiles.sh && stat utilities/updater/updateFiles.sh
-COPY dockerfiles/updatecvs.sh utilities/updater
+# stat: can't stat 'utilities/updater/updateFiles.sh': No such file or directory
+# RUN rm utilities/updater/updateFiles.sh && stat utilities/updater/updateFiles.sh
 
-RUN set -xe && chmod +x utilities/updater/updatecvs.sh && \
-    ./utilities/updater/updatecvs.sh
+RUN rm utilities/updater/updateFiles.sh
+
+COPY dockerfiles/updater_cvs.sh utilities/updater
+
+RUN set -xe && chmod +x utilities/updater/updater_cvs.sh && \
+    ./utilities/updater/updater_cvs.sh
 
 #Update CVE databases
 # CMD ["/bin/bash","updateFiles.sh"]
