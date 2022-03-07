@@ -59,4 +59,11 @@ jobs:
         set -xe
         mkdir -p /usr/share/nmap/scripts/vulscan
         ls -lai  /usr/share/nmap/scripts/vulscan
+        git clone https://github.com/scipag/vulscan.git \
+        /usr/share/nmap/scripts/vulscan && \
+        ls -lai
+        ls -lai /usr/share/nmap/scripts/vulscan
+        ln -s `pwd`/scipag_vulscan /usr/share/nmap/scripts/vulscan
+        chmod +x utilities/updater/updateFiles.sh
+        ./utilities/updater/updateFiles.sh
     
