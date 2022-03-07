@@ -56,8 +56,7 @@ do
     filename=$(echo ${file} | awk -F/ '{print $NF}')
     # result=$(diff --suppress-common-lines --speed-large-files -y ${filename} ../../../${filename} | wc -l)
     result=$(diff ${filename} ../${filename} | wc -l)
-    # STATUS="$(cmp --silent $FILE1 $FILE2; echo $?)" 
-    result=$(cmp --silent ${filename} ../${filename} && echo $?)    
+    result=$(cmp -s ${filename} ../${filename} && echo $?)    
     
     if [ ${result} -ne 0 ]; then
 	logIfDebug "Updating ${filename} as it differs"
