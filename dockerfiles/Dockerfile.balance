@@ -1,0 +1,22 @@
+# https://hub.docker.com/_/alpine
+FROM alpine:latest AS build
+LABEL org.opencontainers.image.authors="githubfoam"
+
+ARG BALANCE_VERSION
+
+WORKDIR /src
+
+https://balance.inlab.net/overview/
+RUN apk --update add curl alpine-sdk && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm /var/cache/apk/* && \
+    curl -o balance-${BALANCE_VERSION}.tar \
+    https://download.inlab.net/Balance/${BALANCE_VERSION}/balance-${BALANCE_VERSION}.tar && \
+    tar xf balance-${BALANCE_VERSION}.tar && \
+    cd balance-${BALANCE_VERSION} && make 
+
+FROM docker.io/alpine:latest
+ARG BALANCE_VERSION
+COPY --from=build /src/balance-${BALANCE_VERSION}/balance /usr/local/bin/balance
+ENTRYPOINT ["/usr/local/bin/balance", "-f"]
+CMD ["-h"]
