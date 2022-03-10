@@ -40,6 +40,6 @@ jobs:
         docker system df -v               
         docker image inspect ${name}:${version}
         docker run ${name}:${version} \
-          balance -b 2001:DB8::1 80 10.1.1.1 10.1.1.     
+          -b 2001:DB8::1 80 10.1.1.1 10.1.1.     
 
    
