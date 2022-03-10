@@ -45,10 +45,7 @@ jobs:
         # invalid port [balance], exiting.        
         # docker run ${name}:${version} \
         #   balance -b 2001:DB8::1 80 10.1.1.1 10.1.1.    
-        #  [/usr/local/bin/balance]
-        # /home/runner/work/_temp/ef62937f-3e38-46a9-b382-6b44e11e29ea.sh: line 17: -b: command not found        
-        # docker run ${name}:${version} \l
-        #     -b 2001:DB8::1 80 10.1.1.1 10.1.1.          
+        
 
    alpine-ubuntu-latest-balance-job:
     name: "balance alpine-ubuntu docker ubuntu latest"
