@@ -3,17 +3,10 @@ FROM alpine:latest
 LABEL org.opencontainers.image.authors="githubfoam"
 
 
-RUN apk --update add \
-    git \
-    strace \
-    less \
-    openssh && \
+RUN apk --update add sshfs && \    
     rm -rf /var/lib/apt/lists/* && \
     rm /var/cache/apk/*
 
-#docker run --privileged=true -it --rm --name alpine-sshfs sshfs-image
-RUN apk update && apk add sshfs 
-
-ENTRYPOINT ["sshfs"]
+ENTRYPOINT ["/usr/local/bin/sshfs"]
 CMD ["-h"]
 
