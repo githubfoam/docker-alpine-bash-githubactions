@@ -16,7 +16,7 @@ jobs:
       version: "latest"
       name: "alpine/balance"
       dockerfiledir: "dockerfiles"
-      dockerfilename: "Dockerfile.alpine.balance"
+      dockerfilename: "Dockerfile.balance"
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
