@@ -14,8 +14,9 @@ jobs:
     env:
       distribution: "alpine" #https://hub.docker.com/_/alpine
       version: "latest"
-      name: "alpine/base"
-      dockerfilename: "Dockerfile.sshfs"
+      name: "alpine/sshfs"
+      dockerfiledir: "dockerfiles"      
+      dockerfilename: "Dockerfile.alpine.sshfs"
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
@@ -31,7 +32,7 @@ jobs:
       run: |
         # destroyed afterwards (use --rm )
         # all subsequent Dockerfile commands generate new images and the cache is not used
-        sudo docker build --no-cache --rm  -t ${name}/${version} . --file dockerfiles/${dockerfilename} 
+        sudo docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
         docker image ls
         docker image history ${name}/${version} 
         docker system df -v               
