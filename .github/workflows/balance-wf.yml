@@ -38,6 +38,8 @@ jobs:
         docker image ls
         docker image history ${name}:${version}
         docker system df -v               
-        docker image inspect ${name}:${version}     
+        docker image inspect ${name}:${version}
+        docker run ${name}:${version} \
+          balance -h #OK     
 
    
