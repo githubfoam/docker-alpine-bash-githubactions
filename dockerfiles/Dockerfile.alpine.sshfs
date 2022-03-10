@@ -9,6 +9,7 @@ RUN set -xe && \
     rm /var/cache/apk/* && \
     sshfs -V
 
-ENTRYPOINT ["/usr/local/bin/sshfs"]
+# ENTRYPOINT ["/usr/local/bin/sshfs"]
+ENTRYPOINT ["sshfs"]
 CMD ["-h"]
 
