@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       distribution: "alpine" 
-      version: "latest"
+      version: "3.57"
       name: "alpine/balance"
       dockerfiledir: "dockerfiles"
       dockerfilename: "Dockerfile.balance"
@@ -34,7 +34,7 @@ jobs:
         # all subsequent Dockerfile commands generate new images and the cache is not used
         # https://balance.inlab.net/overview/
         # sudo docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
-        sudo docker build --build-arg BALANCE_VERSION="3.57" --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
+        sudo docker build --build-arg BALANCE_VERSION=${version} --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
         docker image ls
         docker image history ${name}:${version}
         docker system df -v               
