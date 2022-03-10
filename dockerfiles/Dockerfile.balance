@@ -14,7 +14,8 @@ RUN apk --update add curl alpine-sdk && \
     tar xf balance-${BALANCE_VERSION}.tar && \
     cd balance-${BALANCE_VERSION} && make 
 
-FROM alpine:latest
+# FROM alpine:latest
+FROM ubuntu:latest
 ARG BALANCE_VERSION
 COPY --from=build /src/balance-${BALANCE_VERSION}/balance /usr/local/bin/balance
 ENTRYPOINT ["/usr/local/bin/balance", "-f"]
