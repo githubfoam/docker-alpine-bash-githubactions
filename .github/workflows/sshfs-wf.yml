@@ -40,4 +40,7 @@ jobs:
         # find ENTRYPOINT & CMD on an image
         docker inspect -f '{{.Config.Entrypoint}}' ${name}:${version}
         docker run ${name}:${version} -V      
+        docker run -i ${name}:${version} -V  
+        docker run -i ${name}:${version} sshfs -V          
+        docker run -it ${name}:${version} sshfs -V  
     

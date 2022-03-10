@@ -6,10 +6,8 @@ LABEL org.opencontainers.image.authors="githubfoam"
 RUN set -xe && \
     apk --update add sshfs && \    
     rm -rf /var/lib/apt/lists/* && \
-    rm /var/cache/apk/* && \
-    sshfs -V
+    rm /var/cache/apk/*
 
-# ENTRYPOINT ["/usr/local/bin/sshfs"]
 ENTRYPOINT ["sshfs"]
 CMD ["-h"]
 
