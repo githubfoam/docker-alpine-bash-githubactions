@@ -78,5 +78,5 @@ jobs:
         # find ENTRYPOINT & CMD on an image
         docker inspect -f '{{.Config.Entrypoint}}' ${name}:${version}
         docker run ${name}:${version} \
-          -b 2001:DB8::1 80 10.1.1.1 10.1.1.  
+          balance -b 2001:DB8::1 80 10.1.1.1 10.1.1. 
    
